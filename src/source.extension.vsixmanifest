@@ -3,7 +3,7 @@
     <Metadata>
         <Identity Id="Shifter.2788249e-f649-4ef6-a0e4-e390ccdbe588" Version="1.0" Language="en-US" Publisher="Mads Kristensen" />
         <DisplayName>Shifter</DisplayName>
-        <Description>Empty VSIX Project.</Description>
+        <Description xml:space="preserve">String and code manipulations, performed on keyboard shortcut with detection of intended manipulation.</Description>
         <License>Resources\LICENSE</License>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>

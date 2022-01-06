@@ -9,7 +9,7 @@ namespace Shifter
     {
         public const string Id = "Shifter.2788249e-f649-4ef6-a0e4-e390ccdbe588";
         public const string Name = "Shifter";
-        public const string Description = @"Empty VSIX Project.";
+        public const string Description = @"String and code manipulations, performed on keyboard shortcut with detection of intended manipulation.";
         public const string Language = "en-US";
         public const string Version = "1.0";
         public const string Author = "Mads Kristensen";
