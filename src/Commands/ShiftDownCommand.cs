@@ -25,15 +25,21 @@ namespace Shifter
             SnapshotSpan selection = GetSelectedSpan(docView.TextView, caretPosition);
 
             string text = selection.GetText();
+            int start = caretPosition - selection.Start;
 
-            if (ShiftEngine.TryShift(text, caretPosition - selection.Start, direction, out ShiftResult result))
+            if (ShiftEngine.TryShift(text, start, direction, out ShiftResult result))
             {
+                // Update text buffer
                 Span span = new(result.Start + selection.Start, result.Length);
                 ITextSnapshot snapshot = docView.TextBuffer.Replace(span, result.ShiftedText);
 
-                SnapshotPoint point = new(snapshot, caretPosition.Position);
+                // Maintain caret position
+                Span newSpan = new(result.Start + selection.Start, result.ShiftedText.Length);
+                int endPosition = newSpan.Contains(caretPosition) ? caretPosition : newSpan.End;
+                SnapshotPoint point = new(snapshot, endPosition);
                 docView.TextView.Caret.MoveTo(point);
 
+                // Select the new text
                 docView.TextView.Selection.Select(new SnapshotSpan(snapshot, span.Start, result.ShiftedText.Length), false);
             }
         }
