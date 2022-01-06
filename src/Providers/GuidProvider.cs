@@ -1,11 +1,11 @@
-﻿using System.Globalization;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Shifter.Providers
 {
     public class GuidProvider : RegexProviderBase
     {
-        private static readonly Regex _regex = new(@"[-+]?\d*\.?\d+\b", RegexOptions.Compiled);
+        private static readonly Regex _regex = new(@"\b[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public override Regex Regex => _regex;
 
@@ -13,69 +13,37 @@ namespace Shifter.Providers
         {
             result = null;
 
-            if (!float.TryParse(match.Value, out float value))
+            if (!Guid.TryParse(match.Value, out Guid guid))
             {
                 return false;
             }
 
-            int dot = match.Value.IndexOf('.');
-            string format = dot > -1 ? "#.#0" : string.Empty;
-            int decimalPlaces = NumberDecimalPlaces(match.Value);
-            float delta = GetDelta(decimalPlaces);
-
-            if (decimalPlaces > 0)
-            {
-                format = "F" + decimalPlaces;
-            }
-
-            string shiftedText;
-
             if (direction == ShiftDirection.Down)
             {
-                shiftedText = (value - delta).ToString(format, CultureInfo.InvariantCulture);
+                result = new ShiftResult(match.Index, match.Length, PrevGuid(guid).ToString());
             }
             else
             {
-                shiftedText = (value + delta).ToString(format, CultureInfo.InvariantCulture);
+                result = new ShiftResult(match.Index, match.Length, NextGuid(guid).ToString());
             }
-
-            if (dot == 0 && shiftedText.Length > 1)
-            {
-                shiftedText = shiftedText.Substring(1);
-            }
-
-            result = new ShiftResult(match.Index, match.Length, shiftedText);
 
             return true;
         }
 
-        private static float GetDelta(int decimalPlaces)
+        private static readonly int[] _byteOrder = { 15, 14, 13, 12, 11, 10, 9, 8, 6, 7, 4, 5, 0, 1, 2, 3 };
+
+        private static Guid NextGuid(Guid guid)
         {
-            return decimalPlaces switch
-            {
-                0 => 1F,
-                1 => 0.1F,
-                2 => 0.01F,
-                3 => 0.001F,
-                4 => 0.0001F,
-                5 => 0.00001F,
-                6 => 0.000001F,
-                7 => 0.0000001F,
-                8 => 0.00000001F,
-                9 => 0.000000001F,
-                _ => 0.0000000001F,
-            };
+            byte[] bytes = guid.ToByteArray();
+            bool canIncrement = _byteOrder.Any(i => ++bytes[i] != 0);
+            return new Guid(canIncrement ? bytes : new byte[16]);
         }
 
-        private static int NumberDecimalPlaces(string value)
+        private static Guid PrevGuid(Guid guid)
         {
-            int s = value.IndexOf(".", StringComparison.CurrentCulture) + 1; // the first numbers plus decimal point
-            if (s == 0)                     // No decimal point
-            {
-                return 0;
-            }
-
-            return value.Length - s;     //total length minus beginning numbers and decimal = number of decimal points
+            byte[] bytes = guid.ToByteArray();
+            bool canIncrement = _byteOrder.Any(i => --bytes[i] != 0);
+            return new Guid(canIncrement ? bytes : new byte[16]);
         }
     }
 }

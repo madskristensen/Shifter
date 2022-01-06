@@ -44,8 +44,13 @@ namespace Shifter.Providers
                 shiftedText = shiftedText.Substring(1);
             }
 
-            result = new ShiftResult(match.Index, match.Length, shiftedText);
+            // Keep leading zeros
+            if (match.Value[0] == '0')
+            {
+                shiftedText = shiftedText.PadLeft(match.Value.Length, '0');
+            }
 
+            result = new ShiftResult(match.Index, match.Length, shiftedText);
             return true;
         }
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.Text;
-using Shifter.Providers;
+﻿using Shifter.Providers;
 
 namespace Shifter
 {
@@ -15,17 +14,7 @@ namespace Shifter
                 return;
             }
 
-            SnapshotPoint position = docView.TextView.Caret.Position.BufferPosition;
-            ITextSnapshotLine line = docView.TextBuffer.CurrentSnapshot.GetLineFromPosition(position);
-
-            string text = line.GetText();
-
-            if (ShiftEngine.Parse(text, position - line.Start, ShiftDirection.Up, out ShiftResult result))
-            {
-                Span span = new(result.Start + line.Start, result.Length);
-                docView.TextBuffer.Replace(span, result.ShiftedText);
-                //docView.TextView.Caret.MoveTo(position);
-            }
+            ShiftDownCommand.Shift(docView, ShiftDirection.Up);
         }
     }
 }

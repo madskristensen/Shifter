@@ -6,6 +6,8 @@ namespace Shifter.Providers
     {
         private static readonly List<IProvider> _providers = new()
         {
+            new ColorHexProvider(),
+            new GuidProvider(),
             new NumberProvider(),
             new ColorNamesProvider(),
         };

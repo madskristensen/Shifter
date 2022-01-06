@@ -17,7 +17,7 @@ namespace ShifterTest
         [DataTestMethod]
         [DataRow("abc blue number", 6, "mediumblue", "royalblue")]
         [DataRow("abc Azure number", 6, "Aliceblue", "Mintcream")]
-        public void NumberMethod(string textIn, int position, string down, string up)
+        public void ColorNames(string textIn, int position, string down, string up)
         {
             bool successDown = _provider.TryShiftLine(textIn, position, ShiftDirection.Down, out ShiftResult resultDown);
             bool successUp = _provider.TryShiftLine(textIn, position, ShiftDirection.Up, out ShiftResult resultUp);
