@@ -10,9 +10,10 @@ namespace Shifter.Providers
             new GuidProvider(),
             new NumberProvider(),
             new ColorNamesProvider(),
+            new BooleanProvider(),
         };
 
-        public static bool Parse(string textIn, int caretPosition, ShiftDirection direction, out ShiftResult result)
+        public static bool TryShift(string textIn, int caretPosition, ShiftDirection direction, out ShiftResult result)
         {
             result = null;
 

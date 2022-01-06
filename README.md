@@ -11,9 +11,11 @@ or get the [CI build][vsixgallery].
 
 --------------------------------------
 
-Shifter shifts the text under the cursor depending on the text. For example, if the cursor is on a number, Shifter will increase or decrease the number. This makes common tasks super quick and keyboard friendly.
+Shifter shifts the text under the caret depending on the text. For example, if the caret is on a number, Shifter will increase or decrease the number. This makes common tasks super quick and keyboard friendly.
 
 ![Shifter](art/shifter.gif)
+
+The value being shifted is either the text where the caret is placed, or the selected text range.
 
 ## Keyboard shortcuts
 
@@ -29,6 +31,8 @@ Shifter shifts the text under the cursor depending on the text. For example, if 
 **Named colors** will shift to the adjacent named color in the pallet. For instance, shifting up `blue` will make it `royalblue`.
 
 **Guids** will be incremented or decremented when shifted. A quick way to change a guid slightly.
+
+**Boolean** values such as `true/false`, `on/off`, `yes/no` will shift to the opposite regardless of shifting direction.
 
 ### How can I help?
 If you enjoy using the extension, please give it a ★★★★★ rating on the [Visual Studio Marketplace][marketplace].

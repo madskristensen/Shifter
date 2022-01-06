@@ -42,9 +42,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShiftEngineTest.cs" />
     <Compile Include="ColorHexProviderTest.cs" />
     <Compile Include="GuidProviderTest.cs" />
     <Compile Include="ColorNamesProviderTest.cs" />
+    <Compile Include="BooleanProviderTest.cs" />
     <Compile Include="NumberProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
