@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32104.457
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shifter", "src\Shifter.csproj", "{E85B2415-74C4-485E-A3C3-867608F0DA01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShifterTest", "test\ShifterTest.csproj", "{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{619464A1-9176-4877-81E6-0192E2D4FF70}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		vs-publish.json = vs-publish.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Debug|x86.ActiveCfg = Debug|x86
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Debug|x86.Build.0 = Debug|x86
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Release|x86.ActiveCfg = Release|x86
+		{E85B2415-74C4-485E-A3C3-867608F0DA01}.Release|x86.Build.0 = Release|x86
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D6AE44D-573C-47E6-BCF7-F3B4798500CF}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E700488-D35D-4D21-946A-9681320FA859}
+	EndGlobalSection
+EndGlobal

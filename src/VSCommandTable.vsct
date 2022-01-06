@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+  <Include href="VSGlobals.vsct"/>
+
+  <Commands package="Shifter">
+    <Buttons>
+      <Button guid="Shifter" id="ShiftDown" priority="0x0100" type="Button">
+        <CommandFlag>CommandWellOnly</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Shift Down</ButtonText>
+          <LocCanonicalName>.Shifter.ShiftDown</LocCanonicalName>
+        </Strings>
+      </Button>
+    
+      <Button guid="Shifter" id="ShiftUp" priority="0x0100" type="Button">
+        <CommandFlag>CommandWellOnly</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Shift Up</ButtonText>
+          <LocCanonicalName>.Shifter.ShiftUp</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <KeyBindings>
+    <KeyBinding guid="Shifter" id="ShiftDown" editor="GUID_TextEditorFactory" key1="VK_DOWN" mod1="Control Alt" />
+    <KeyBinding guid="Shifter" id="ShiftUp" editor="GUID_TextEditorFactory" key1="VK_UP" mod1="Control Alt" />
+  </KeyBindings>
+
+  <VisibilityConstraints>
+    <VisibilityItem guid="Shifter" id="ShiftDown" context="GUID_TextEditorFactory" />
+    <VisibilityItem guid="Shifter" id="ShiftUp" context="GUID_TextEditorFactory" />
+  </VisibilityConstraints>
+
+  <Symbols>
+    <GuidSymbol name="Shifter" value="{a3dc2100-ffab-436a-a3d6-96b5be081484}">
+      <IDSymbol name="ShiftDown" value="0x0100" />
+      <IDSymbol name="ShiftUp" value="0x0200" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
