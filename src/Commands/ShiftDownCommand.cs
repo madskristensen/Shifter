@@ -38,6 +38,9 @@ namespace Shifter
                 int endPosition = newSpan.Contains(caretPosition) ? caretPosition : newSpan.End;
                 SnapshotPoint point = new(snapshot, endPosition);
                 docView.TextView.Caret.MoveTo(point);
+
+                // Select the new text
+                docView.TextView.Selection.Select(new SnapshotSpan(snapshot, span.Start, result.ShiftedText.Length), false);
             }
         }
 
