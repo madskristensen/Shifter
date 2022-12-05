@@ -13,7 +13,7 @@ namespace Shifter.Providers
         {
             result = null;
 
-            if (!float.TryParse(match.Value, out float value))
+            if (!float.TryParse(match.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out float value))
             {
                 return false;
             }
