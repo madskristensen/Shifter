@@ -3,13 +3,13 @@ using System.Text.RegularExpressions;
 
 namespace Shifter.Providers
 {
-    public class NumberProvider : RegexProviderBase
+    public class NumberProvider : IncrementalRegexProviderBase
     {
         private static readonly Regex _regex = new(@"[-+]?\d*\.?\d+\b", RegexOptions.Compiled);
 
         public override Regex Regex => _regex;
 
-        public override bool TryShiftSelection(Match match, ShiftDirection direction, out ShiftResult result)
+        public override bool TryShiftSelection(Match match, ShiftDirection direction, int sequence, out ShiftResult result)
         {
             result = null;
 
@@ -21,40 +21,70 @@ namespace Shifter.Providers
             int dot = match.Value.IndexOf('.');
             string format = dot > -1 ? "#.#0" : string.Empty;
             int decimalPlaces = NumberDecimalPlaces(match.Value);
-            float delta = GetDelta(decimalPlaces);
+            float delta = GetDelta(decimalPlaces, sequence);
 
             if (decimalPlaces > 0)
             {
                 format = "F" + decimalPlaces;
             }
 
-            string shiftedText;
+            float shiftedValue = direction == ShiftDirection.Down
+                ? value - delta
+                : value + delta;
 
-            if (direction == ShiftDirection.Down)
-            {
-                shiftedText = (value - delta).ToString(format, CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                shiftedText = (value + delta).ToString(format, CultureInfo.InvariantCulture);
-            }
-
+            string shiftedText = shiftedValue.ToString(format, CultureInfo.InvariantCulture); ;
             if (dot == 0 && shiftedText.Length > 1)
             {
                 shiftedText = shiftedText.Substring(1);
             }
 
             // Keep leading zeros
-            if (match.Value[0] == '0')
+            if (KeepLeadingZeros(match.Value, value))
             {
-                shiftedText = shiftedText.PadLeft(match.Value.Length, '0');
+                int padLength = GetPadLength(match.Value, value, shiftedValue);
+                shiftedText = shiftedText.PadLeft(padLength, '0');
+
+                if (shiftedValue < 0)
+                {
+                    shiftedText = $"-{shiftedText.Replace("-", "")}";
+                }
             }
 
             result = new ShiftResult(match.Index, match.Length, shiftedText);
             return true;
+
+            static bool KeepLeadingZeros(string value, float numValue)
+            {
+                // 0.1
+                if (value[0] == '0' && value.Length > 1 && value[1] == '.') return false;
+                // -0.1
+                if (value[0] == '-' && value.Length > 2 && value[1] == '0' && value[2] == '.') return false;
+                // 0123
+                if (value[0] == '0' && numValue != 0) return true;
+                // -001
+                if (value[0] == '-' && value.Length > 1 && value[1] == '0') return true;
+                // 0000
+                if (value.Length > 1 && numValue == 0 && !value.Contains(".")) return true;
+
+                return false;
+            }
+
+            static int GetPadLength(string textValue, float oldValue, float newValue)
+            {
+                int textLength = textValue.Length;
+                bool oldNegative = oldValue < 0;
+                bool newNegative = newValue < 0;
+                return (oldNegative, newNegative) switch
+                {
+                    (true, true) => textLength,
+                    (true, false) => textLength - 1,
+                    (false, true) => textLength + 1,
+                    (false, false) => textLength,
+                };
+            }
         }
 
-        private static float GetDelta(int decimalPlaces)
+        private static float GetDelta(int decimalPlaces, int sequence)
         {
             return decimalPlaces switch
             {
@@ -69,7 +99,7 @@ namespace Shifter.Providers
                 8 => 0.00000001F,
                 9 => 0.000000001F,
                 _ => 0.0000000001F,
-            };
+            } * (1 + sequence);
         }
 
         private static int NumberDecimalPlaces(string value)

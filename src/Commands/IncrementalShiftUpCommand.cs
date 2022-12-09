@@ -2,8 +2,8 @@
 
 namespace Shifter
 {
-    [Command(PackageIds.ShiftUp)]
-    internal sealed class ShiftUpCommand : BaseCommand<ShiftUpCommand>
+    [Command(PackageIds.IncrementalShiftUp)]
+    internal sealed class IncrementalShiftUpCommand : BaseCommand<IncrementalShiftUpCommand>
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
@@ -14,7 +14,7 @@ namespace Shifter
                 return;
             }
 
-            ShiftDownCommand.Shift(docView, ShiftDirection.Up, false);
+            ShiftDownCommand.Shift(docView, ShiftDirection.Up, true);
         }
     }
 }

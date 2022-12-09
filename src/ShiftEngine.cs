@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Shifter.Providers
 {
@@ -13,15 +14,34 @@ namespace Shifter.Providers
             new BooleanProvider(),
         };
 
-        public static bool TryShift(string textIn, int caretPosition, ShiftDirection direction, out ShiftResult result)
+        public static bool TryShift(string textIn, int caretPosition, ShiftDirection direction, int? sequence, out ShiftResult result)
         {
             result = null;
 
-            foreach (IProvider provider in _providers)
+            bool isIncremental = sequence.HasValue;
+            if (isIncremental)
             {
-                if (provider.TryShiftLine(textIn, caretPosition, direction, out result))
+                // Try shift only using incremental providers
+                IEnumerable<IIncrementalProvider> incrementalProviders = _providers
+                    .Select(static provider => provider as IIncrementalProvider)
+                    .Where(static provider => provider != null);
+                foreach (IIncrementalProvider incrementalProvider in incrementalProviders)
                 {
-                    return true;
+                    if (incrementalProvider.TryShiftLine(textIn, caretPosition, direction, sequence.Value, out result))
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            else
+            {
+                foreach (IProvider provider in _providers)
+                {
+                    if (provider.TryShiftLine(textIn, caretPosition, direction, out result))
+                    {
+                        return true;
+                    }
                 }
             }
 

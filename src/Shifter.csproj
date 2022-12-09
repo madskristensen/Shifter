@@ -45,13 +45,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\IncrementalShiftDownCommand.cs" />
+    <Compile Include="Commands\IncrementalShiftUpCommand.cs" />
     <Compile Include="Commands\ShiftUpCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\ShiftDownCommand.cs" />
     <Compile Include="Providers\Implementations\BooleanProvider.cs" />
     <Compile Include="Providers\Implementations\ColorHexProvider.cs" />
     <Compile Include="Providers\Implementations\GuidProvider.cs" />
+    <Compile Include="Providers\IncrementalRegexProvderBase.cs" />
     <Compile Include="Providers\IProvider.cs" />
+    <Compile Include="Providers\IIncrementalProvider.cs" />
     <Compile Include="Providers\Implementations\ColorNamesProvider.cs" />
     <Compile Include="Providers\RegexProviderBase.cs" />
     <Compile Include="Providers\Implementations\NumberProvider.cs" />

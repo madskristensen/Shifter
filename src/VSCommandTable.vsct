@@ -25,23 +25,47 @@
           <LocCanonicalName>.Shifter.ShiftUp</LocCanonicalName>
         </Strings>
       </Button>
+
+      <Button guid="Shifter" id="IncrementalShiftDown" priority="0x0100" type="Button">
+        <CommandFlag>CommandWellOnly</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Incremental Shift Down</ButtonText>
+          <LocCanonicalName>.Shifter.IncrementalShiftDown</LocCanonicalName>
+        </Strings>
+      </Button>
+    
+      <Button guid="Shifter" id="IncrementalShiftUp" priority="0x0100" type="Button">
+        <CommandFlag>CommandWellOnly</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Incremental Shift Up</ButtonText>
+          <LocCanonicalName>.Shifter.IncrementalShiftUp</LocCanonicalName>
+        </Strings>
+      </Button>
     </Buttons>
   </Commands>
 
   <KeyBindings>
     <KeyBinding guid="Shifter" id="ShiftDown" editor="GUID_TextEditorFactory" key1="VK_DOWN" mod1="Control Alt" />
     <KeyBinding guid="Shifter" id="ShiftUp" editor="GUID_TextEditorFactory" key1="VK_UP" mod1="Control Alt" />
+    <KeyBinding guid="Shifter" id="IncrementalShiftDown" editor="GUID_TextEditorFactory" key1="VK_DOWN" mod1="Shift Control Alt" />
+    <KeyBinding guid="Shifter" id="IncrementalShiftUp" editor="GUID_TextEditorFactory" key1="VK_UP" mod1="Shift Control Alt" />
   </KeyBindings>
 
   <VisibilityConstraints>
     <VisibilityItem guid="Shifter" id="ShiftDown" context="GUID_TextEditorFactory" />
     <VisibilityItem guid="Shifter" id="ShiftUp" context="GUID_TextEditorFactory" />
+    <VisibilityItem guid="Shifter" id="IncrementalShiftDown" context="GUID_TextEditorFactory" />
+    <VisibilityItem guid="Shifter" id="IncrementalShiftUp" context="GUID_TextEditorFactory" />
   </VisibilityConstraints>
 
   <Symbols>
     <GuidSymbol name="Shifter" value="{a3dc2100-ffab-436a-a3d6-96b5be081484}">
       <IDSymbol name="ShiftDown" value="0x0100" />
       <IDSymbol name="ShiftUp" value="0x0200" />
+      <IDSymbol name="IncrementalShiftDown" value="0x0300" />
+      <IDSymbol name="IncrementalShiftUp" value="0x0400" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
