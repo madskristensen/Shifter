@@ -17,14 +17,20 @@ Shifter shifts the text under the caret depending on the text. For example, if t
 
 The value being shifted is either the text where the caret is placed, or the selected text range.
 
+![Shifter](art/multiple_carets.gif)
+
+If using multiple carets, each selected text will be shifted separately.
+
 ## Keyboard shortcuts
 
 * Shift up: **Ctrl+Alt+Up**
 * Shift down: **Ctrl+Alt+Down**
+* Incremental Shift up: **Shift+Ctrl+Alt+Up**
+* Incremental Shift down: **Shift+Ctrl+Alt+Down**
 
 ## Supported shifts
 
-**Numbers**, including decimals, will increase or decrease with a value that depends on the number of decimals.
+**Numbers**, including decimals, will increase or decrease with a value that depends on the number of decimals (supports incremental shift).
 
 **Hex colors** will either brighten or darken slightly when shifted.
 
@@ -33,6 +39,12 @@ The value being shifted is either the text where the caret is placed, or the sel
 **Guids** will be incremented or decremented when shifted. A quick way to change a guid slightly.
 
 **Boolean** values such as `true/false`, `on/off`, `yes/no` will shift to the opposite regardless of shifting direction.
+
+## Incremental shifts
+
+![Shifter](art/incremental_shifter.gif)
+
+With incremental shift each selection will be shifted incrementally in order from top/left to bottom/right. 
 
 ### How can I help?
 If you enjoy using the extension, please give it a ★★★★★ rating on the [Visual Studio Marketplace][marketplace].

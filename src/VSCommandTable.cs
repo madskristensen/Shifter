@@ -22,5 +22,7 @@ namespace Shifter
     {
         public const int ShiftDown = 0x0100;
         public const int ShiftUp = 0x0200;
+        public const int IncrementalShiftDown = 0x0300;
+        public const int IncrementalShiftUp = 0x0400;
     }
 }

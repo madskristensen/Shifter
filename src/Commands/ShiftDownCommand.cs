@@ -19,10 +19,10 @@ namespace Shifter
                 return;
             }
 
-            Shift(docView, ShiftDirection.Down);
+            Shift(docView, ShiftDirection.Down, false);
         }
 
-        public static void Shift(DocumentView docView, ShiftDirection direction)
+        public static void Shift(DocumentView docView, ShiftDirection direction, bool incremental)
         {
             IWpfTextView textView = docView.TextView!;
             IMultiSelectionBroker multiSelectionBroker = textView.GetMultiSelectionBroker();
@@ -63,7 +63,7 @@ namespace Shifter
                     int selectionCaret = end - selection.InsertionPoint.Position.Position;
 
                     // Try to shift with each selection
-                    if (ShiftEngine.TryShift(text, selectionCaret, direction, out ShiftResult shiftResult))
+                    if (ShiftEngine.TryShift(text, selectionCaret, direction, incremental ? i : null, out ShiftResult shiftResult))
                     {
                         shiftResults[i] = shiftResult;
                     }
@@ -124,7 +124,7 @@ namespace Shifter
                 string text = selection.GetText();
                 int start = caretPosition - selection.Start;
 
-                if (ShiftEngine.TryShift(text, start, direction, out ShiftResult result))
+                if (ShiftEngine.TryShift(text, start, direction, null, out ShiftResult result))
                 {
                     // Update text buffer
                     Span span = new(result.Start + selection.Start, result.Length);
