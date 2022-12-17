@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Shifter.Providers
@@ -185,7 +182,7 @@ namespace Shifter.Providers
             result = new(match.Index, match.Length, shiftedText);
             return true;
 
-            static int GetShiftedIndex(int index, bool down) => (index + _list.Count + (down ? -1 : 1)) % _list.Count;
+            static int GetShiftedIndex(int index, bool down) => (index + _list.Count + (down ? 1 : -1)) % _list.Count;
         }
     }
 }
