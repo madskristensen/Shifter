@@ -9,6 +9,14 @@
     {
       "pathOnDisk": "art/shifter.gif",
       "targetPath": "art/shifter.gif"
+    },
+    {
+      "pathOnDisk": "art/incremental_shifter.gif",
+      "targetPath": "art/incremental_shifter.gif"
+    },
+    {
+      "pathOnDisk": "art/multiple_carets.gif",
+      "targetPath": "art/multiple_carets.gif"
     }
   ],
   "overview": "README.md",
