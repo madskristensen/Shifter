@@ -14,7 +14,7 @@ namespace Shifter
                 return;
             }
 
-            ShiftDownCommand.Shift(docView, ShiftDirection.Down, true);
+            await ShiftDownCommand.ShiftAsync(docView, ShiftDirection.Down, true);
         }
     }
 }
